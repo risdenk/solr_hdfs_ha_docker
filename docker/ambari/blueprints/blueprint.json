@@ -1,0 +1,105 @@
+{
+   "configurations" : [
+     { 
+       "core-site": {
+         "properties" : {
+           "fs.defaultFS" : "hdfs://mycluster",
+           "ha.zookeeper.quorum" : "%HOSTGROUP::zk1%:2181"
+         }
+       }
+     },
+     {
+       "hdfs-site": {
+         "properties" : {
+           "dfs.client.failover.proxy.provider.mycluster" : "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+           "dfs.ha.automatic-failover.enabled" : "true",
+           "dfs.ha.fencing.methods" : "shell(/bin/true)",
+           "dfs.ha.namenodes.mycluster" : "nn1,nn2",
+           "dfs.namenode.http-address" : "%HOSTGROUP::nn1%:50070",
+           "dfs.namenode.http-address.mycluster.nn1" : "%HOSTGROUP::nn1%:50070",
+           "dfs.namenode.http-address.mycluster.nn2" : "%HOSTGROUP::nn2%:50070",
+           "dfs.namenode.https-address" : "%HOSTGROUP::nn1%:50470",
+           "dfs.namenode.https-address.mycluster.nn1" : "%HOSTGROUP::nn1%:50470",
+           "dfs.namenode.https-address.mycluster.nn2" : "%HOSTGROUP::nn2%:50470",
+           "dfs.namenode.rpc-address.mycluster.nn1" : "%HOSTGROUP::nn1%:8020",
+           "dfs.namenode.rpc-address.mycluster.nn2" : "%HOSTGROUP::nn2%:8020",
+           "dfs.namenode.shared.edits.dir" : "qjournal://%HOSTGROUP::jn1%:8485;%HOSTGROUP::jn2%:8485;%HOSTGROUP::jn3%:8485/mycluster",
+           "dfs.nameservices" : "mycluster"
+         }
+       }
+     }
+   ],
+   "host_groups" : [
+    {
+      "components" : [
+	{"name" : "NAMENODE"},
+        {"name" : "ZKFC"}
+      ],
+      "configurations" : [ ],
+      "name" : "nn1",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "NAMENODE"},
+	{"name" : "ZKFC"}
+      ],
+      "configurations" : [ ],
+      "name" : "nn2",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "JOURNALNODE"}
+      ],
+      "configurations" : [ ],
+      "name" : "jn1",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "JOURNALNODE"}
+      ],
+      "configurations" : [ ],
+      "name" : "jn2",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "JOURNALNODE"}
+      ],
+      "configurations" : [ ],
+      "name" : "jn3",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "ZOOKEEPER_SERVER"},
+	{"name" : "ZOOKEEPER_CLIENT"}
+      ],
+      "configurations" : [ ],
+      "name" : "zk1",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "DATANODE"}
+      ],
+      "configurations" : [ ],
+      "name" : "dn1",
+      "cardinality" : "1"
+    },
+    {
+      "components" : [
+	{"name" : "HDFS_CLIENT"}
+      ],
+      "configurations" : [ ],
+      "name" : "solr1",
+      "cardinality" : "1"
+    }
+  ],
+  "Blueprints" : {
+    "stack_name" : "HDP",
+    "stack_version" : "2.5"
+  }
+}

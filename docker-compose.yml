@@ -1,0 +1,75 @@
+version: '2'
+services:
+  localrepo:
+    image: risdenk/hdp_local_repo
+    ports:
+      - '80'
+
+  postgres:
+    build: docker/postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+
+  ambari:
+    build: docker/ambari
+    hostname: ambari
+    depends_on:
+      - postgres
+      - localrepo
+    ports:
+      - '8080:8080'
+ 
+  nn1:
+    build: docker/ambari-agent
+    hostname: nn1
+    depends_on:
+      - ambari
+    ports:
+      - '50070'
+
+  nn2:
+    build: docker/ambari-agent
+    hostname: nn2
+    depends_on:
+      - ambari
+    ports:
+      - '50070'
+
+  zk1:
+    build: docker/ambari-agent
+    hostname: zk1
+    depends_on:
+      - ambari
+
+  jn1:
+    build: docker/ambari-agent
+    hostname: jn1
+    depends_on:
+      - ambari
+
+  jn2:
+    build: docker/ambari-agent
+    hostname: jn2
+    depends_on:
+      - ambari
+
+  jn3:
+    build: docker/ambari-agent
+    hostname: jn3
+    depends_on:
+      - ambari
+  
+  dn1:
+    build: docker/ambari-agent
+    hostname: dn1
+    depends_on:
+      - ambari
+
+  solr1:
+    build: docker/ambari-agent
+    hostname: solr1
+    depends_on:
+      - ambari
+    ports:
+      - '8983:8983'
+

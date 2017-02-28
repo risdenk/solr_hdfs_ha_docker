@@ -1,0 +1,54 @@
+{
+  "blueprint" : "hdfs_ha",
+  "default_password" : "password",
+  "host_groups" :[
+    {
+      "name" : "nn1",
+      "hosts" : [
+        {"fqdn" : "nn1"}
+      ]
+    },
+    {
+      "name" : "nn2",
+      "hosts" : [
+        {"fqdn" : "nn2"}
+      ]
+    },
+    {
+      "name" : "jn1",
+      "hosts" : [
+        {"fqdn" : "jn1"}
+      ]
+    },
+    {
+      "name" : "jn2",
+      "hosts" : [
+        {"fqdn" : "jn2"}
+      ]
+    },
+    {
+      "name" : "jn3",
+      "hosts" : [
+        {"fqdn" : "jn3"}
+      ]
+    },
+    {
+      "name" : "zk1",
+      "hosts" : [
+        {"fqdn" : "zk1"}
+      ]
+    },
+    {
+      "name" : "dn1",
+      "hosts" : [
+        {"fqdn" : "dn1"}
+      ]
+    },
+    {
+      "name" : "solr1",
+      "hosts" : [
+        {"fqdn" : "solr1"}
+      ]
+    }
+  ]
+}
