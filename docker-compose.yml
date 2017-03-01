@@ -66,7 +66,7 @@ services:
       - ambari
 
   solr1:
-    build: docker/ambari-agent
+    build: docker/solr
     hostname: solr1
     depends_on:
       - ambari

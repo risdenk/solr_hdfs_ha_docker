@@ -14,18 +14,13 @@ SOLR-10215 found that the HDFS HA support for Solr 6.4.0 and 6.4.1 was broken. T
 3. `./run.sh`
 
 ## Testing Solr Versions
-### Setup
-```bash
-docker-compose exec solr1 bash -c "yum -y install lsof && useradd solr && mkdir /opt/solr && chown solr /opt/solr"
-```
-### Test
 ```bash
 docker-compose exec --user=solr solr1 bash
 export JAVA_HOME=/usr/jdk64/jdk1.8.0_77
 cd /opt/solr
 ```
 
-#### Solr 6.3.0 - Works
+### Solr 6.3.0 - Works
 ```bash
 wget -nc -O solr-6.3.0.tgz http://archive.apache.org/dist/lucene/solr/6.3.0/solr-6.3.0.tgz
 tar zxvf solr-6.3.0.tgz
@@ -41,7 +36,7 @@ cd /opt/solr
 rm -rf /opt/solr/solr-6.3.0/
 ```
 
-#### Solr 6.4.0 and 6.4.1 - Doesn't Work
+### Solr 6.4.0 and 6.4.1 - Doesn't Work
 ```bash
 wget -nc -O solr-6.4.1.tgz http://apache.mirrors.lucidnetworks.net/lucene/solr/6.4.1/solr-6.4.1.tgz
 tar zxvf solr-6.4.1.tgz
@@ -59,7 +54,7 @@ cd /opt/solr
 rm -rf /opt/solr/solr-6.4.1/
 ```
 
-#### Solr 6.5.0-254 - Works
+### Solr 6.5.0-254 - Works
 ```bash
 wget -nc -O solr-6.5.0-254.tgz https://builds.apache.org/job/Solr-Artifacts-6.x/lastStableBuild/artifact/solr/package/solr-6.5.0-254.tgz
 tar zxvf solr-6.5.0-254.tgz
